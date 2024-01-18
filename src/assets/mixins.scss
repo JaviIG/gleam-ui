@@ -1,0 +1,56 @@
+@mixin scrollbar() {
+  $thumb-color: var(--background-color-1);
+
+  &::-webkit-scrollbar {
+    width: 20px;
+  }
+
+  &::-webkit-scrollbar-track {
+    border: solid 1px transparent;
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    transition: background-color 0.25s ease-out;
+    border: 6px solid transparent;
+    border-radius: 9999px;
+    background-clip: content-box;
+    background-color: $thumb-color;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: hsla(41, 5%, 20%, 0.75);
+  }
+}
+
+$breakpoints: (
+  s: 480px,
+  m: 768px,
+  l: 1024px,
+  xl: 1280px,
+  2xl: 1440px,
+);
+
+@mixin mq($size) {
+  @if map-has-key($breakpoints, $size) {
+    $min-width: map-get($breakpoints, $size);
+    @media (min-width: #{$min-width}) {
+      @content;
+    }
+  } @else {
+    @error "Invalid breakpoint size #{$size}. Please use 's', 'm', 'l', or 'xl'.";
+  }
+}
+
+@mixin sr-only {
+  border: 0 !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  position: absolute !important;
+  clip-path: inset(50%) !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+}

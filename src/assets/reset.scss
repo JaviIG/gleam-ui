@@ -1,0 +1,68 @@
+*:not(script, style, head, svg, svg *, datalist, dialog),
+:after,
+:before {
+  all: unset;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  display: block;
+  width: 100%;
+}
+
+html {
+  background: var(--neutral-color-0);
+  height: 100%;
+  min-height: 100%;
+  overflow: auto;
+  overscroll-behavior: none;
+  color: var(--neutral-color-100);
+}
+
+body {
+  -webkit-text-size-adjust: 100%;
+  min-height: 100%;
+  overflow: hidden;
+  font-family: var(--main-font-family);
+
+  a[href],
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  img,
+  div,
+  section,
+  article,
+  header,
+  main,
+  footer,
+  nav {
+    display: block;
+  }
+
+  pre {
+    font-family: monospace;
+    white-space: pre;
+  }
+}
+
+img {
+  overflow: clip;
+}
+
+* {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--primary-color-50);
+  outline-offset: 2px;
+}

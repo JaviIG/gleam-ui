@@ -1,0 +1,98 @@
+:root,
+::backdrop {
+  // Colors
+  --primary-color-25: hsl(41, 65%, 35%);
+  --primary-color-50: hsl(41, 74%, 53%);
+  --primary-color-60: hsl(41, 75%, 57%);
+  --primary-color-75: hsl(41, 75%, 80%);
+  --primary-color-75-25: hsla(41, 75%, 80%, 0.25);
+
+  --secondary-color-25: hsl(301, 40%, 20%);
+  --secondary-color-50: hsl(301, 75%, 45%);
+  --secondary-color-75: hsl(301, 60%, 80%);
+
+  --neutral-color-0: hsl(41, 15%, 5%);
+  --neutral-color-0-80: hsla(41, 15%, 5%, 0.8);
+  --neutral-color-25: hsl(41, 10%, 25%);
+  --neutral-color-50: hsl(41, 7.5%, 55%);
+  --neutral-color-75: hsl(41, 10%, 65%);
+  --neutral-color-90: hsl(41, 12.5%, 85%);
+  --neutral-color-100: hsl(41, 15%, 95%);
+
+  --success-color-50: hsl(106, 53%, 56%);
+  --success-color-50-75: hsla(106, 53%, 56%, 0.75);
+  --error-color-25-75: hsla(355, 70%, 20%, 0.75);
+  --error-color-50: hsl(355, 78%, 42%);
+  --error-color-50-25: hsl(355, 78%, 42%, 0.25);
+  --error-color-50-75: hsl(355, 78%, 42%, 0.75);
+  --error-color-65: hsl(355, 75%, 45%);
+  --error-color-75: hsl(355, 80%, 85%);
+
+  --font-color-lightest: var(--neutral-color-100);
+  --font-color-light: var(--neutral-color-90);
+  --font-color-faded: var(--neutral-color-75);
+  --font-color-dark: var(--neutral-color-50);
+
+  --background-color-1: hsla(41, 5%, 35%, 0.4);
+  --border-color-1: hsla(41, 20%, 90%, 0.15);
+
+  --background-color-2: hsla(41, 5%, 27.5%, 0.5);
+  --border-color-2: hsla(41, 20%, 87.5%, 0.15);
+
+  --background-color-3: hsla(41, 5%, 20%, 0.5);
+  --border-color-3: hsla(41, 20%, 85%, 0.1);
+
+  // Fonts
+  --main-font-family: Roboto;
+
+  --font-weight-thin: 300;
+  --font-weight-regular: 400;
+  --font-weight-bold: 600;
+
+  --font-size-xs: 0.65rem;
+  --font-size-s: 0.75rem;
+  --font-size-m: 1rem;
+  --font-size-l: 1.15rem;
+  --font-size-xl: 1.3rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.7rem;
+  --font-size-4xl: 2rem;
+
+  // Spacing
+  --spacing-3xs: 2px;
+  --spacing-2xs: 4px;
+  --spacing-xs: 8px;
+  --spacing-s: 12px;
+  --spacing-m: 16px;
+  --spacing-l: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 64px;
+  --spacing-4xl: 256px;
+
+  // Bleed
+  --bleed-3xs: -2px;
+  --bleed-2xs: -4px;
+  --bleed-xs: -8px;
+  --bleed-s: -12px;
+  --bleed-m: -16px;
+  --bleed-l: -24px;
+  --bleed-xl: -32px;
+  --bleed-2xl: -64px;
+  --bleed-4xl: -256px;
+
+  // Radius
+  --border-radius-s: 4px;
+  --border-radius-m: 8px;
+  --border-radius-l: 16px;
+  --border-radius-xl: 24px;
+  --border-radius-2xl: 32px;
+  --border-radius-pill: 999999px;
+
+  // Shadows
+
+  // Blur
+  --blur-xs: 2px;
+  --blur-s: 4px;
+  --blur-m: 12px;
+  --blur-l: 64px;
+}
