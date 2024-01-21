@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import GlmBox from '@/components/GlmBox.vue';
+import GlmBox from './components/GlmBox.vue';
 </script>
 
 <template>

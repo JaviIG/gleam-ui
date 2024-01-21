@@ -2,13 +2,24 @@
   "files": [],
   "references": [
     {
-      "path": "./tsconfig.node.json"
+      "path": "./tsconfig.node.json",
     },
     {
-      "path": "./tsconfig.app.json"
+      "path": "./tsconfig.app.json",
     },
     {
-      "path": "./tsconfig.vitest.json"
-    }
-  ]
+      "path": "./tsconfig.vitest.json",
+    },
+  ],
+  "compilerOptions": {
+    "jsx": "preserve",
+    "jsxImportSource": "vue",
+  },
+  "ts-node": {
+    // Workaround for Cypress failing to load cypress.config.ts
+    "transpileOnly": true,
+    "compilerOptions": {
+      "module": "ES2015",
+    },
+  },
 }
