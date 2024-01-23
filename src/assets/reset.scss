@@ -12,12 +12,10 @@ body {
 }
 
 html {
-  background: var(--neutral-color-0);
   height: 100%;
   min-height: 100%;
   overflow: auto;
   overscroll-behavior: none;
-  color: var(--neutral-color-100);
 }
 
 body {
@@ -55,14 +53,4 @@ body {
 
 img {
   overflow: clip;
-}
-
-* {
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-}
-
-*:focus-visible {
-  outline: 2px solid var(--primary-color-50);
-  outline-offset: 2px;
 }

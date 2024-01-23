@@ -3,10 +3,10 @@ import type { Component, Plugin } from 'vue';
 
 export const GleamPlugin: Plugin<GleamPluginOptions> = {
   install: (app, options) => {
-    app.component(GlmInternalLink, options.linkComponent);
+    if (options.linkComponent) app.component(GlmInternalLink, options.linkComponent);
   },
 };
 
 export type GleamPluginOptions = {
-  linkComponent: Component;
+  linkComponent?: Component;
 };

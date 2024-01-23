@@ -1,49 +1,55 @@
+@import './palette';
+@import './mixins';
+
 :root,
 ::backdrop {
-  // Colors
-  --primary-color-25: hsl(41, 65%, 35%);
-  --primary-color-50: hsl(41, 74%, 53%);
-  --primary-color-60: hsl(41, 75%, 57%);
-  --primary-color-75: hsl(41, 75%, 80%);
-  --primary-color-75-25: hsla(41, 75%, 80%, 0.25);
+  // Font colors
 
-  --neutral-color-0: hsl(41, 15%, 5%);
-  --neutral-color-0-80: hsla(41, 15%, 5%, 0.8);
-  --neutral-color-25: hsl(41, 10%, 25%);
-  --neutral-color-50: hsl(41, 7.5%, 55%);
-  --neutral-color-75: hsl(41, 10%, 65%);
-  --neutral-color-75-50: hsla(41, 10%, 65%, 0.5);
-  --neutral-color-75-75: hsla(41, 10%, 65%, 0.75);
-  --neutral-color-90: hsl(41, 12.5%, 85%);
-  --neutral-color-100: hsl(41, 15%, 95%);
-  --neutral-color-100-75: hsl(41, 15%, 95%, 0.5);
+  --font-color-lightest: #{$neutral-95};
+  --font-color-light: #{$neutral-90};
+  --font-color-faded: #{$neutral-75};
+  --font-color-dark: #{$neutral-50};
 
-  // Semantic colors
-  --success-color-50: hsl(106, 53%, 56%);
-  --success-color-50-75: hsla(106, 53%, 56%, 0.75);
-  --success-color-50-85: hsla(106, 53%, 56%, 0.85);
+  // Generic boxes
+  --background-color-1: #{transparentize($neutral-35, 45%)};
+  --border-color-1: #{transparentize($neutral-95, 50%)};
 
-  --error-color-25-75: hsla(355, 70%, 20%, 0.75);
-  --error-color-50: hsl(355, 78%, 42%);
-  --error-color-50-25: hsl(355, 78%, 42%, 0.25);
-  --error-color-50-75: hsl(355, 78%, 42%, 0.75);
-  --error-color-50-85: hsl(355, 78%, 42%, 0.85);
-  --error-color-65: hsl(355, 75%, 45%);
-  --error-color-75: hsl(355, 80%, 85%);
+  --background-color-2: #{transparentize($neutral-25, 60%)};
+  --border-color-2: #{transparentize($neutral-95, 45%)};
 
-  --font-color-lightest: var(--neutral-color-100);
-  --font-color-light: var(--neutral-color-90);
-  --font-color-faded: var(--neutral-color-75);
-  --font-color-dark: var(--neutral-color-50);
+  --background-color-3: #{transparentize($neutral-10, 60%)};
+  --border-color-3: #{transparentize($neutral-95, 40%)};
 
-  --background-color-1: hsla(41, 5%, 35%, 0.4);
-  --border-color-1: hsla(41, 10%, 95%, 0.2);
+  // Controls
+  --control-inset-shadow-color: #{transparentize($neutral-90, 75%)};
 
-  --background-color-2: hsla(41, 5%, 27.5%, 0.5);
-  --border-color-2: hsla(41, 10%, 90%, 0.2);
+  --control-default-background: #{transparentize($neutral-75, 60%)};
+  --control-default-background-hover: #{transparentize($neutral-75, 75%)};
+  --control-default-shadow-color: #{transparentize($neutral-75, 75%)};
 
-  --background-color-3: hsla(41, 5%, 20%, 0.5);
-  --border-color-3: hsla(41, 10%, 85%, 0.2);
+  --control-transparent-background-hover: #{transparentize($neutral-75, 15%)};
+
+  --control-primary-background: #{transparentize($primary-50, 60%)};
+  --control-primary-background-hover: #{transparentize($primary-50, 75%)};
+  --control-primary-shadow-color: #{transparentize($primary-50, 75%)};
+
+  --control-success-background: #{transparentize($green-75, 60%)};
+  --control-success-background-hover: #{transparentize($green-75, 75%)};
+  --control-success-shadow-color: #{transparentize($green-75, 75%)};
+
+  --control-error-background: #{transparentize($red-40, 60%)};
+  --control-error-background-hover: #{transparentize($red-40, 75%)};
+  --control-error-shadow-color: #{transparentize($red-40, 75%)};
+
+  // Inputs
+  --input-default-shadow-color: #{transparentize($neutral-90, 25%)};
+  --input-default-shadow-inset-color: #{transparentize($neutral-5, 85%)};
+  --input-default-background: #{transparentize($neutral-10, 65%)};
+  --input-default-background-focus: #{transparentize($neutral-10, 75%)};
+
+  --input-error-border-color: #{transparentize($red-25, 75%)};
+  --input-error-background: #{transparentize($red-15, 65%)};
+  --input-error-background-focus: #{transparentize($red-15, 75%)};
 
   // Fonts
   --main-font-family: 'Source Sans Pro', sans-serif;
@@ -56,36 +62,18 @@
   --font-size-s: 0.75rem;
   --font-size-m: 1rem;
   --font-size-l: 1.15rem;
-  --font-size-xl: 1.3rem;
+  --font-size-xl: 1.25rem;
   --font-size-2xl: 1.5rem;
-  --font-size-3xl: 1.7rem;
+  --font-size-3xl: 1.75rem;
   --font-size-4xl: 2rem;
-
-  // Spacing
-  --spacing-3xs: 0.125rem;
-  --spacing-2xs: 0.25rem;
-  --spacing-xs: 0.5rem;
-  --spacing-s: 0.75rem;
-  --spacing-m: 1rem;
-  --spacing-l: 1.25rem;
-  --spacing-xl: 1.5rem;
-  --spacing-2xl: 2rem;
-
-  // Bleed
-  --bleed-3xs: -0.125rem;
-  --bleed-2xs: -0.25rem;
-  --bleed-xs: -0.5rem;
-  --bleed-s: -0.75rem;
-  --bleed-m: -1rem;
-  --bleed-l: -1.25rem;
-  --bleed-xl: -1.5rem;
-  --bleed-2xl: -2rem;
+  --font-size-5xl: 2.25rem;
 
   // Radius
-  --border-radius-s: 4px;
-  --border-radius-m: 8px;
-  --border-radius-l: 16px;
-  --border-radius-xl: 24px;
+  --border-radius-xs: 0.25rem;
+  --border-radius-s: 0.5rem;
+  --border-radius-m: 1rem;
+  --border-radius-l: 1.5rem;
+  --border-radius-xl: 2rem;
   --border-radius-2xl: 32px;
   --border-radius-pill: 999999px;
 

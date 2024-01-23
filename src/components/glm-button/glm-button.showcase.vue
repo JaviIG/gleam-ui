@@ -4,13 +4,13 @@ import { ButtonSizes, ButtonVariants } from '@/components/glm-button/glm-button.
 import GlmButton from '@/components/glm-button/glm-button.vue';
 import GlmLike from '@/components/icons/glm-like.vue';
 
-const testCases = (['idle', 'disabled', 'loading'] as const).flatMap((status) =>
-  ButtonSizes.flatMap((size) =>
-    ButtonVariants.flatMap((variant) =>
-      [false, true].flatMap((onlyIcon) => ({
+const testCases = ButtonVariants.flatMap((variant) =>
+  (['idle', 'disabled', 'loading'] as const).flatMap((status) =>
+    ButtonSizes.flatMap((size) =>
+      [false, true].flatMap((iconOnly) => ({
         size,
         variant,
-        onlyIcon,
+        iconOnly,
         disabled: status === 'disabled',
         loading: status === 'loading',
       }))
@@ -34,7 +34,7 @@ function getTitle(props: ExtractProps<typeof GlmButton>) {
       data-testid="glm-button"
       :title="getTitle(testCase)"
     >
-      <template v-if="testCase.onlyIcon"><GlmLike /></template>
+      <template v-if="testCase.iconOnly"><GlmLike /></template>
       <template v-else>Click me</template>
     </GlmButton>
   </div>

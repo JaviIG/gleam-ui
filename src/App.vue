@@ -16,7 +16,7 @@ import GlmBox from './components/GlmBox.vue';
 .glm-demo {
   display: grid;
   place-items: center;
-  background: url('/images/sunset-living-room.jpg') center center;
+  background: url('/images/purple-bg.jpg') center center;
   background-size: cover;
   width: 100vw;
   height: 100vh;

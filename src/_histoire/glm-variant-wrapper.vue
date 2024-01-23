@@ -1,22 +1,31 @@
 <script lang="ts" setup>
 import GlmBox from '../components/GlmBox.vue';
+
+const isStory = location.pathname === '/__sandbox.html';
 </script>
 
 <template>
-  <div class="glm-variant-wrapper">
-    <GlmBox blur="m">
+  <div v-if="isStory" class="glm-variant-wrapper">
+    <GlmBox class="glm-variant-wrapper__box" blur="m">
       <slot />
     </GlmBox>
+  </div>
+  <div v-else>
+    <slot />
   </div>
 </template>
 
 <style lang="scss" scoped>
 .glm-variant-wrapper {
   border-radius: var(--border-radius-xl);
-  background: url('/images/sunset-living-room.jpg');
+  background: url('/images/purple-bg.jpg');
   background-size: cover;
-  padding: var(--spacing-2xl);
+  padding: #{$spacing-2xl};
   width: 100%;
   height: 100%;
+
+  &__box {
+    min-height: 256px;
+  }
 }
 </style>

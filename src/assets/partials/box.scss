@@ -1,26 +1,40 @@
+@mixin box-border($color) {
+  position: relative;
+
+  &:after {
+    position: absolute;
+    z-index: 1;
+    mask: linear-gradient(
+      135deg,
+      black 0%,
+      rgba(0, 0, 0, 0.05) 20%,
+      rgba(0, 0, 0, 0.05) 80%,
+      black
+    );
+    inset: -1px;
+    border: solid 1px $color;
+    border-radius: inherit;
+    pointer-events: none;
+    content: '';
+  }
+}
 %box-1 {
   box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.5);
   border: solid 1px transparent;
   background: var(--background-color-1);
-  &:after {
-    position: absolute;
-    z-index: -1;
-    mask: linear-gradient(135deg, black 0%, transparent 20%, transparent 80%, black);
-    inset: -1px;
-    border: solid 1px var(--border-color-1);
-    border-radius: inherit;
-    content: '';
-  }
+  @include box-border(var(--border-color-1));
 }
 
 %box-2 {
-  border: solid 1px var(--border-color-2);
+  border: solid 1px transparent;
   background: var(--background-color-2);
+  @include box-border(var(--border-color-2));
 }
 
 %box-3 {
-  border: solid 1px var(--border-color-3);
+  border: solid 1px transparent;
   background: var(--background-color-3);
+  @include box-border(var(--border-color-2));
 }
 
 %blur-s {

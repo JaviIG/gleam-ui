@@ -1,3 +1,9 @@
+@use './palette' as *;
+
+@function transparentize($color, $amount) {
+  @return color-mix(in lch, #{$color} $amount, rgba(0, 0, 0, 0));
+}
+
 @mixin scrollbar() {
   $thumb-color: var(--background-color-1);
 
@@ -53,4 +59,8 @@ $breakpoints: (
   height: 1px !important;
   overflow: hidden !important;
   white-space: nowrap !important;
+}
+
+@mixin outline() {
+  outline: 4px solid transparentize($neutral-95, 30%);
 }

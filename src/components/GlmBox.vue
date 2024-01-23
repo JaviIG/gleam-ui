@@ -11,7 +11,7 @@ withDefaults(
     tag: 'div',
     size: 'm',
     blur: false,
-  },
+  }
 );
 </script>
 
@@ -43,15 +43,15 @@ withDefaults(
 
   &--size-s {
     border-radius: var(--border-radius-s);
-    padding: var(--spacing-s);
+    padding: #{$spacing-s};
   }
   &--size-m {
     border-radius: var(--border-radius-m);
-    padding: var(--spacing-m);
+    padding: #{$spacing-m};
   }
   &--size-l {
     border-radius: var(--border-radius-l);
-    padding: var(--spacing-l);
+    padding: #{$spacing-l};
   }
 
   &--blur-s {
