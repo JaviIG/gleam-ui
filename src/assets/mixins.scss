@@ -5,7 +5,10 @@
 }
 
 @mixin scrollbar() {
-  $thumb-color: var(--background-color-1);
+  $track-background: transparentize($neutral-90, 10%);
+  $track-radius: var(--border-radius-l);
+  $thumb-color: transparentize($neutral-95, 25%);
+  $thumb-hover-color: transparentize($neutral-95, 35%);
 
   &::-webkit-scrollbar {
     width: 20px;
@@ -13,11 +16,12 @@
 
   &::-webkit-scrollbar-track {
     border: solid 1px transparent;
-    background: transparent;
+    border-radius: 0 $track-radius $track-radius 0 / 0 $track-radius $track-radius 0;
+    background: $track-background;
   }
 
   &::-webkit-scrollbar-thumb {
-    transition: background-color 0.25s ease-out;
+    transition: 0.25s ease-out;
     border: 6px solid transparent;
     border-radius: 9999px;
     background-clip: content-box;
@@ -25,7 +29,7 @@
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background-color: hsla(41, 5%, 20%, 0.75);
+    background-color: $thumb-hover-color;
   }
 }
 
@@ -61,6 +65,7 @@ $breakpoints: (
   white-space: nowrap !important;
 }
 
+$outline-value: 4px solid transparentize($neutral-95, 30%);
 @mixin outline() {
-  outline: 4px solid transparentize($neutral-95, 30%);
+  outline: $outline-value;
 }

@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import GlmVariantWrapper from '../../_histoire/glm-variant-wrapper.vue';
 import GlmButtonShowcase from './glm-button.showcase.vue';
 import GlmButton from './glm-button.vue';
 import { ButtonSizes, ButtonVariants } from '@/components/glm-button/glm-button.utils';
@@ -21,19 +20,19 @@ const sizeOptions = ButtonSizes;
 const variantOptions = ButtonVariants;
 </script>
 <template>
-  <Story title="GlmButton" auto-props-disabled>
+  <Story auto-props-disabled title="GlmButton">
     <Variant title="Default">
       <template #controls>
-        <HstButtonGroup v-model="state.kind" title="Kind" :options="kindOptions" />
-        <HstButtonGroup v-model="state.size" title="Size" :options="sizeOptions" />
-        <HstButtonGroup v-model="state.variant" title="Variant" :options="variantOptions" />
+        <HstButtonGroup v-model="state.kind" :options="kindOptions" title="Kind" />
+        <HstButtonGroup v-model="state.size" :options="sizeOptions" title="Size" />
+        <HstButtonGroup v-model="state.variant" :options="variantOptions" title="Variant" />
         <HstCheckbox v-model="state.iconOnly" title="Only Icon" />
         <HstCheckbox v-model="state.disabled" title="Disabled" />
         <HstCheckbox v-model="state.loading" title="Loading" />
       </template>
       <GlmButton v-bind="state" @click="logEvent('click', $event)">
         <GlmLike v-if="state.iconOnly" />
-        <template v-else> Click me </template>
+        <template v-else> Click me</template>
       </GlmButton>
     </Variant>
 

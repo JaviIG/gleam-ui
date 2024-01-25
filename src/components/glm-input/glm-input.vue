@@ -1,8 +1,11 @@
 <script lang="ts" setup>
-import type { ExtractProps } from '@/components/component.utils';
 import type { ButtonSize } from '@/components/glm-button/glm-button.utils';
 import GlmButton from '@/components/glm-button/glm-button.vue';
-import type { InputSize, InputStatus } from '@/components/glm-input/glm-input.utils';
+import type {
+  InputSize,
+  InputStatus,
+  StartEndSlotsScope,
+} from '@/components/glm-input/glm-input.utils';
 import GlmClear from '@/components/icons/glm-clear.vue';
 import { useId } from '@/composables/id.composable';
 import { computed, ref } from 'vue';
@@ -22,15 +25,15 @@ const props = withDefaults(
   }
 );
 
+const emit = defineEmits<{
+  blur: [FocusEvent];
+  focus: [FocusEvent];
+  keydown: [KeyboardEvent];
+  keyup: [KeyboardEvent];
+}>();
+
 const modelValue = defineModel<string>();
 
-const emit = defineEmits<{}>();
-
-defineSlots<{
-  placeholder?: () => any;
-  start?: () => any;
-  end?: () => any;
-}>();
 const isEmpty = computed(() => !modelValue.value);
 
 const id = useId('glm-input', ['placeholder']);
@@ -39,6 +42,7 @@ const hasFocus = ref(false);
 const controlRef = ref<HTMLInputElement>();
 
 function clearValue() {
+  if (props.status === 'readonly' || props.status === 'disabled') return;
   modelValue.value = '';
   controlRef.value!.focus();
 }
@@ -48,23 +52,17 @@ const inputSizeToButtonSize: Record<InputSize, ButtonSize> = {
   l: 'm',
 };
 const slotScope = computed(
-  (): SlotScope => ({
+  (): StartEndSlotsScope => ({
     iconProps: {
       class: 'glm-input__icon',
     },
     buttonProps: {
       size: inputSizeToButtonSize[props.size],
+      disabled: props.status === 'readonly' || props.status === 'disabled',
       onClick: stopPropagation,
     },
   })
 );
-
-type SlotScope = {
-  iconProps: {
-    class: string;
-  };
-  buttonProps: ExtractProps<typeof GlmButton>;
-};
 
 function stopPropagation(event: Event) {
   event.stopPropagation();
@@ -74,11 +72,35 @@ function focusInput() {
   controlRef.value!.focus();
 }
 
+function onBlur(event: FocusEvent) {
+  hasFocus.value = false;
+  emit('blur', event);
+}
+
+function onFocus(event: FocusEvent) {
+  hasFocus.value = true;
+  emit('focus', event);
+}
+
+function onKeydown(event: KeyboardEvent) {
+  emit('keydown', event);
+}
+
+function onKeyup(event: KeyboardEvent) {
+  emit('keyup', event);
+}
+
 defineExpose({
   id,
   hasFocus,
   controlRef,
 });
+
+defineSlots<{
+  placeholder?: () => any;
+  start?: (scope: StartEndSlotsScope) => any;
+  end?: (scope: StartEndSlotsScope) => any;
+}>();
 </script>
 
 <template>
@@ -99,8 +121,11 @@ defineExpose({
       class="glm-input__control"
       type="text"
       :aria-describedby="id.placeholder"
-      @focus="hasFocus = true"
-      @blur="hasFocus = false"
+      :readonly="status === 'readonly'"
+      @focus="onFocus"
+      @blur="onBlur"
+      @keydown="onKeydown"
+      @keyup="onKeyup"
     />
     <div class="glm-input__end">
       <GlmButton
@@ -189,6 +214,18 @@ defineExpose({
     --_glm-input-background: var(--input-error-background);
     --_glm-input-background-focus: var(--input-error-background-focus);
     --_glm-input-border-color: var(--input-error-border-color);
+  }
+
+  &--status-disabled {
+    opacity: 0.8;
+    filter: grayscale(0.5) brightness(0.5);
+    cursor: default;
+    pointer-events: none;
+  }
+
+  &--status-readonly {
+    opacity: 0.8;
+    filter: grayscale(0.2);
   }
 
   &--focus {

@@ -24,10 +24,6 @@ body {
   overflow: hidden;
   font-family: var(--main-font-family);
 
-  a[href],
-  button:not(:disabled) {
-    cursor: pointer;
-  }
   h1,
   h2,
   h3,
