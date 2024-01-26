@@ -1,7 +1,9 @@
 /// <reference types="cypress" />
 /// <reference types="@testing-library/cypress" />
 /// <reference types="cypress-visual-regression" />
+/// <reference types="cypress-real-events" />
 import '@testing-library/cypress/add-commands';
+import 'cypress-real-events';
 import { addCompareSnapshotCommand } from 'cypress-visual-regression/dist/command';
 import { mount } from 'cypress/vue';
 

@@ -82,8 +82,8 @@ describe('GlmSelect', () => {
         },
       });
 
-      select.trigger.click();
-      select.listbox.findByText('Spain').click();
+      select.trigger.realClick();
+      select.listbox.findByText('Spain').realClick();
       select.shouldHaveValue('Spain');
     });
 
@@ -94,11 +94,11 @@ describe('GlmSelect', () => {
         },
       });
 
-      select.trigger.click();
+      select.trigger.realClick();
       select.listbox.should('be.visible');
       cy.document()
         .then((doc) => doc.body)
-        .click('bottom');
+        .realClick('bottom');
       select.listbox.should('not.exist');
     });
   });
@@ -110,7 +110,7 @@ describe('GlmSelect', () => {
           items: CountriesList,
         },
       });
-      select.trigger.click();
+      select.trigger.realClick();
 
       select.input.type('{downArrow}');
       select.nthOptionShouldBeHighlighted(0);
@@ -135,11 +135,11 @@ describe('GlmSelect', () => {
         },
       });
 
-      select.trigger.click();
+      select.trigger.realClick();
       select.input.type('{downArrow}'.repeat(3)).type('{enter}');
       select.shouldHaveValue(CountriesList[2]);
 
-      select.trigger.click();
+      select.trigger.realClick();
       select.input.type('{downArrow}'.repeat(6)).type(`{esc}`);
       select.shouldHaveValue(CountriesList[2]);
     });
@@ -151,7 +151,7 @@ describe('GlmSelect', () => {
         },
       });
 
-      select.trigger.click();
+      select.trigger.realClick();
       select.input.type('{downArrow}'.repeat(3));
       select.nthOptionShouldBeHighlighted(2);
       select.input.type('{end}');
@@ -167,7 +167,7 @@ describe('GlmSelect', () => {
         slots: { placeholder: () => 'Type something' },
       });
 
-      select.trigger.click();
+      select.trigger.realClick();
       select.input.type('níT'); // intentional casing and accent
       select.options.should('have.length', 3);
       select.input.type('{downArrow}');
@@ -185,7 +185,7 @@ describe('GlmSelect', () => {
       select.listbox.should('not.exist');
       select.shouldHaveValue('United States');
       // Open again and assert united states is highlighted
-      select.trigger.click();
+      select.trigger.realClick();
       select.input.should('have.value', '');
       select.input.should('have.value', '');
       select.nthOptionShouldBeHighlighted(CountriesList.indexOf('United States'));
@@ -209,7 +209,7 @@ describe('GlmSelect', () => {
         slots: { item: ({ item }) => ['Option: ', item] },
       });
 
-      select.trigger.click();
+      select.trigger.realClick();
       select.options.each(($option, index) => {
         cy.wrap($option).should('have.text', `Option: ${CountriesList[index]}`);
       });
@@ -222,7 +222,7 @@ describe('GlmSelect', () => {
         slots: { 'no-items': () => 'There are no items' },
       });
 
-      select.trigger.click();
+      select.trigger.realClick();
       select.input.type('There is no country that matches this string');
       select.listbox.should('have.text', 'There are no items');
     });

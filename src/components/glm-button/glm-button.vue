@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { type Anchor, type Button, GlmInternalLink, type LinkKind } from '../component.utils';
 import type { ButtonSize, ButtonVariant } from './glm-button.utils';
+import GlmLoader from '@/components/glm-loader/glm-loader.vue';
 import GlmSpinner from '@/components/icons/glm-spinner.vue';
 import { useId } from '@/composables/id.composable';
 import { isObject } from '@/utils/object';
@@ -82,7 +83,7 @@ function emitClick(event: MouseEvent) {
     @click="emitClick"
   >
     <slot v-if="loading" name="spinner">
-      <GlmSpinner class="glm-button__spinner" />
+      <GlmLoader class="glm-button__spinner" />
     </slot>
     <slot v-if="!loading || !iconOnly" />
     <span v-if="ariaLabel" :id="id.label" class="glm-button__label">{{ ariaLabel }}</span>

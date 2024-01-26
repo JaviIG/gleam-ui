@@ -78,13 +78,13 @@ describe('GlmInput', () => {
       slots: { placeholder: () => 'Type something' },
     });
 
-    input.input.click().type('Something').blur();
+    input.input.realClick().type('Something').blur();
     input.input.should(($input) => {
       expect($input[0].ownerDocument.activeElement).to.be.equal($input[0].ownerDocument.body);
     });
     cy.wrap(modelValue).should('have.property', 'value', 'Something');
 
-    input.clearInput.click();
+    input.clearInput.realClick();
     input.input.should('have.value', '').should(($input) => {
       expect($input[0].ownerDocument.activeElement).to.be.equal($input[0]);
     });
