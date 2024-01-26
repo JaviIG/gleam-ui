@@ -14,7 +14,7 @@
     "lint:fix": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
     "prepare": "husky install",
-    "story:dev": "histoire dev",
+    "story:dev": "histoire dev --host",
     "story:build": "histoire build",
     "story:preview": "histoire preview",
     "test:component": "cypress run",

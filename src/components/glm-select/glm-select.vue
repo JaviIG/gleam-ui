@@ -1,6 +1,11 @@
 <script generic="T extends string" lang="ts" setup>
 import type { ExtractExposed } from '@/components/component.utils';
-import type { InputSize, InputStatus } from '@/components/glm-input/glm-input.utils';
+import GlmLoader from '@/components/glm-loader/glm-loader.vue';
+import type {
+  SelectLoaderSlotScope,
+  SelectSize,
+  SelectStatus,
+} from '@/components/glm-select/glm-select.utils';
 import GlmChevronDownIcon from '@/components/icons/glm-chevron-down-icon.vue';
 import GlmExpandTransition from '@/components/transitions/glm-expand-transition.vue';
 import GlmListbox from '@/components/utils/glm-listbox.vue';
@@ -13,8 +18,8 @@ const props = withDefaults(
   defineProps<{
     modelValue?: T;
     items: T[];
-    size?: InputSize;
-    status?: InputStatus;
+    size?: SelectSize;
+    status?: SelectStatus;
   }>(),
   {
     size: 'm',
@@ -97,6 +102,14 @@ async function openDropdown(index?: number) {
   inputRef.value!.focus();
 }
 
+const slotScope = computed(
+  (): SelectLoaderSlotScope => ({
+    iconProps: {
+      class: 'glm-select__loader',
+    },
+  })
+);
+
 defineExpose({
   // id,
   controlRef: inputRef,
@@ -105,6 +118,7 @@ defineExpose({
 defineSlots<{
   placeholder?: () => any;
   item?: (scope: { item: T }) => any;
+  loader?: (scope: SelectLoaderSlotScope) => any;
   'no-items'?: () => any;
 }>();
 
@@ -168,6 +182,10 @@ function scrollSelectedItem() {
         <slot name="placeholder">&ZeroWidthSpace;</slot>
       </p>
 
+      <slot v-if="status === 'loading'" name="loader" v-bind="slotScope">
+        <GlmLoader class="glm-select__loader" />
+      </slot>
+
       <GlmChevronDownIcon class="glm-select__chevron" />
     </div>
 
@@ -202,8 +220,8 @@ function scrollSelectedItem() {
 
   &__trigger-wrapper {
     display: grid;
-    grid-template-columns: 1fr min-content;
-    grid-template-areas: 'control chevron';
+    grid-template-columns: 1fr min-content min-content;
+    grid-template-areas: 'control loader chevron';
     align-items: center;
     transition: 0.25s ease-out;
     cursor: var(--_glm-select-cursor);
@@ -253,12 +271,16 @@ function scrollSelectedItem() {
     z-index: 1;
   }
 
+  &__loader {
+    grid-area: loader;
+    margin-inline: $spacing-2xs;
+  }
+
   &__chevron {
     grid-area: chevron;
     transform: rotateX(var(--_glm-select-chevron-rotation));
     transition: transform 0.25s ease-in-out;
     margin-inline: $spacing-m;
-    pointer-events: none;
     color: var(--font-color-faded);
     font-size: var(--_glm-select-icon-size);
   }

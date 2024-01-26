@@ -75,7 +75,7 @@ describe('GlmButton', () => {
   it('adds an spinner when loading', () => {
     const button = renderButton({
       props: {
-        loading: true,
+        status: 'loading',
       },
       slots: { default: () => 'Click Me' },
     });
@@ -86,7 +86,7 @@ describe('GlmButton', () => {
   it('hides icon when iconOnly and loading', () => {
     const button = renderButton({
       props: {
-        loading: true,
+        status: 'loading',
         iconOnly: true,
       },
       slots: { default: () => <GlmLike data-testId="custom-icon" /> },

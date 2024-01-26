@@ -1,14 +1,15 @@
 <script lang="ts" setup>
-import type { ButtonSize } from '@/components/glm-button/glm-button.utils';
+import type { ButtonSize, ButtonStatus } from '@/components/glm-button/glm-button.utils';
 import GlmButton from '@/components/glm-button/glm-button.vue';
 import type {
   InputSize,
   InputStatus,
-  StartEndSlotsScope,
+  InputGenericSlotScope,
 } from '@/components/glm-input/glm-input.utils';
+import GlmLoader from '@/components/glm-loader/glm-loader.vue';
 import GlmClear from '@/components/icons/glm-clear.vue';
 import { useId } from '@/composables/id.composable';
-import { computed, ref } from 'vue';
+import { computed, readonly, ref } from 'vue';
 
 const props = withDefaults(
   defineProps<{
@@ -51,14 +52,22 @@ const inputSizeToButtonSize: Record<InputSize, ButtonSize> = {
   m: 's',
   l: 'm',
 };
+
+const inputStatusToButtonStatus: Record<InputStatus, ButtonStatus> = {
+  disabled: 'disabled',
+  readonly: 'disabled',
+  error: 'idle',
+  idle: 'idle',
+  loading: 'idle',
+};
 const slotScope = computed(
-  (): StartEndSlotsScope => ({
+  (): InputGenericSlotScope => ({
     iconProps: {
       class: 'glm-input__icon',
     },
     buttonProps: {
       size: inputSizeToButtonSize[props.size],
-      disabled: props.status === 'readonly' || props.status === 'disabled',
+      status: inputStatusToButtonStatus[props.status],
       onClick: stopPropagation,
     },
   })
@@ -98,8 +107,9 @@ defineExpose({
 
 defineSlots<{
   placeholder?: () => any;
-  start?: (scope: StartEndSlotsScope) => any;
-  end?: (scope: StartEndSlotsScope) => any;
+  start?: (scope: InputGenericSlotScope) => any;
+  end?: (scope: InputGenericSlotScope) => any;
+  loader?: (scope: InputGenericSlotScope) => any;
 }>();
 </script>
 
@@ -128,6 +138,9 @@ defineSlots<{
       @keyup="onKeyup"
     />
     <div class="glm-input__end">
+      <slot v-if="status === 'loading'" name="loader" v-bind="slotScope">
+        <GlmLoader class="glm-input__loader" />
+      </slot>
       <GlmButton
         v-show="modelValue"
         icon-only
@@ -190,6 +203,10 @@ defineSlots<{
     align-items: center;
     gap: #{$spacing-xs};
     margin-block: calc(-1 * var(--_glm-input-padding));
+  }
+
+  &__loader {
+    margin-inline: $spacing-2xs;
   }
 
   // Sizes

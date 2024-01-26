@@ -1,19 +1,24 @@
 <script setup lang="ts">
 import type { ExtractProps } from '@/components/component.utils';
-import { ButtonSizes, ButtonVariants } from '@/components/glm-button/glm-button.utils';
+import {
+  ButtonSizes,
+  ButtonStatuses,
+  ButtonVariants,
+} from '@/components/glm-button/glm-button.utils';
 import GlmButton from '@/components/glm-button/glm-button.vue';
 import GlmLike from '@/components/icons/glm-like.vue';
 
 const testCases = ButtonVariants.flatMap((variant) =>
-  (['idle', 'disabled', 'loading'] as const).flatMap((status) =>
+  ButtonStatuses.flatMap((status) =>
     ButtonSizes.flatMap((size) =>
-      [false, true].flatMap((iconOnly) => ({
-        size,
-        variant,
-        iconOnly,
-        disabled: status === 'disabled',
-        loading: status === 'loading',
-      }))
+      [false, true].flatMap(
+        (iconOnly): ExtractProps<typeof GlmButton> => ({
+          size,
+          variant,
+          iconOnly,
+          status,
+        })
+      )
     )
   )
 );
@@ -27,16 +32,13 @@ function getTitle(props: ExtractProps<typeof GlmButton>) {
 
 <template>
   <div class="glm-showcase">
-    <GlmButton
-      v-for="(testCase, index) in testCases"
-      :key="index"
-      v-bind="testCase"
-      data-testid="glm-button"
-      :title="getTitle(testCase)"
-    >
-      <template v-if="testCase.iconOnly"><GlmLike /></template>
-      <template v-else>Click me</template>
-    </GlmButton>
+    <div v-for="(props, index) in testCases" :key="index" class="glm-showcase__case">
+      <label class="glm-showcase__label">{{ getTitle(props) }}</label>
+      <GlmButton v-bind="props" data-testid="glm-button" :title="getTitle(props)">
+        <template v-if="props.iconOnly"><GlmLike /></template>
+        <template v-else>Click me</template>
+      </GlmButton>
+    </div>
   </div>
 </template>
 
@@ -44,7 +46,18 @@ function getTitle(props: ExtractProps<typeof GlmButton>) {
 .glm-showcase {
   display: flex;
   flex-flow: row wrap;
-  align-items: flex-start;
-  gap: 2rem;
+  gap: 1.5rem;
+
+  &__case {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: $spacing-m;
+    padding: $spacing-xs 0;
+  }
+
+  &__label {
+    color: var(--font-color-light);
+    font-size: var(--font-size-l);
+  }
 }
 </style>

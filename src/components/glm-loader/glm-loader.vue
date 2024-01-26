@@ -8,64 +8,53 @@ const items = 3;
       v-for="item in items"
       :key="item"
       class="glm-loader__item"
-      :style="{ '--_glm-loader-item-delay': `${item * 0.15}s` }"
-    />
-    <div
-      v-for="item in items"
-      :key="item"
-      class="glm-loader__shadow"
-      :style="{ '--_glm-loader-item-delay': `${item * 0.15}s` }"
+      :style="{ '--_glm-loader-item-index': item }"
     />
   </div>
 </template>
 
 <style scoped lang="scss">
 .glm-loader {
-  display: grid;
-  grid-template-rows: repeat(2, min-content);
-  grid-template-columns: repeat(3, min-content);
-  column-gap: 0.5rem;
-  row-gap: 1.5rem;
-  justify-items: center;
-  filter: blur(1.5px);
+  position: relative;
+  gap: 4px;
+  border-radius: var(--border-radius-pill);
+  background: var(--background-color-3);
+  padding: 0.2rem;
+  width: 2rem;
+  height: 2rem;
 
   &__item {
-    animation: bounce infinite 1s var(--_glm-loader-item-delay) ease-in-out alternate;
-    box-shadow: 0 0 8px 0 $primary-75;
-    border-radius: var(--border-radius-pill);
-    background: $primary-50;
-    width: 0.75rem;
-    height: 0.75rem;
-  }
+    position: absolute;
+    animation: loader infinite 0.75s calc(-0.25s * var(--_glm-loader-item-index)) ease-in-out
+      alternate;
+    inset: 0.3rem;
+    inset-block: calc((var(--_glm-loader-item-index) * -0.3rem) + 0.9rem);
+    width: 1.4rem;
+    height: 1.4rem;
 
-  &__shadow {
-    animation: scale infinite 1s var(--_glm-loader-item-delay) ease-in-out alternate;
-    box-shadow: 0 0 8px -2px $primary-75;
-    border-radius: 50%;
-    background: $primary-50;
+    &:after {
+      display: block;
+      transform: rotateX(45deg) rotateZ(45deg);
+      backdrop-filter: blur(2px) brightness(1.5) saturate(1.75);
+      border-radius: 0.25rem;
+      background: transparentize($primary-50, 50%);
+      width: 100%;
+      height: 100%;
+      content: '';
+    }
 
-    width: 1rem;
-    height: 0.4rem;
+    &:nth-child(2) {
+    }
   }
 }
 
-@keyframes bounce {
+@keyframes loader {
   0% {
-    transform: translateY(0);
+    transform: scale(0.5);
   }
 
   100% {
-    transform: translateY(2.65rem);
-  }
-}
-
-@keyframes scale {
-  60% {
-    transform: scale(1);
-  }
-
-  100% {
-    transform: scale(0);
+    transform: scale(0.75);
   }
 }
 </style>

@@ -1,7 +1,11 @@
 <script lang="ts" setup>
 import GlmButtonShowcase from './glm-button.showcase.vue';
 import GlmButton from './glm-button.vue';
-import { ButtonSizes, ButtonVariants } from '@/components/glm-button/glm-button.utils';
+import {
+  ButtonSizes,
+  ButtonStatuses,
+  ButtonVariants,
+} from '@/components/glm-button/glm-button.utils';
 import GlmLike from '@/components/icons/glm-like.vue';
 import { logEvent } from 'histoire/client';
 import { reactive } from 'vue';
@@ -11,24 +15,20 @@ const state = reactive<Props>({
   kind: 'button',
   size: 'm',
   variant: 'primary',
-  disabled: false,
-  loading: false,
+  status: 'idle',
   iconOnly: false,
 });
 const kindOptions = ['button', 'external-link', 'internal-link'];
-const sizeOptions = ButtonSizes;
-const variantOptions = ButtonVariants;
 </script>
 <template>
   <Story auto-props-disabled title="GlmButton">
     <Variant title="Default">
       <template #controls>
         <HstButtonGroup v-model="state.kind" :options="kindOptions" title="Kind" />
-        <HstButtonGroup v-model="state.size" :options="sizeOptions" title="Size" />
-        <HstButtonGroup v-model="state.variant" :options="variantOptions" title="Variant" />
+        <HstButtonGroup v-model="state.size" :options="ButtonSizes" title="Size" />
+        <HstButtonGroup v-model="state.variant" :options="ButtonVariants" title="Variant" />
+        <HstButtonGroup v-model="state.status" :options="ButtonStatuses" title="Status" />
         <HstCheckbox v-model="state.iconOnly" title="Only Icon" />
-        <HstCheckbox v-model="state.disabled" title="Disabled" />
-        <HstCheckbox v-model="state.loading" title="Loading" />
       </template>
       <GlmButton v-bind="state" @click="logEvent('click', $event)">
         <GlmLike v-if="state.iconOnly" />

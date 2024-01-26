@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { type Anchor, type Button, GlmInternalLink, type LinkKind } from '../component.utils';
-import type { ButtonSize, ButtonVariant } from './glm-button.utils';
+import type { ButtonSize, ButtonStatus, ButtonStatuses, ButtonVariant } from './glm-button.utils';
 import GlmLoader from '@/components/glm-loader/glm-loader.vue';
 import GlmSpinner from '@/components/icons/glm-spinner.vue';
 import { useId } from '@/composables/id.composable';
@@ -16,8 +16,7 @@ const props = withDefaults(
     size?: ButtonSize;
     variant?: ButtonVariant;
     iconOnly?: boolean;
-    disabled?: boolean;
-    loading?: boolean;
+    status?: ButtonStatus;
     ariaLabel?: string;
   }>(),
   {
@@ -37,11 +36,14 @@ const emit = defineEmits<{
 
 defineSlots<{
   default: () => any;
-  spinner?: () => any;
+  loader?: () => any;
   label?: () => any;
 }>();
 
 const id = useId('glm-button', ['label']);
+
+const isDisabled = computed(() => props.status === 'disabled');
+const isLoading = computed(() => props.status === 'loading');
 
 const componentAs = computed((): GlmInternalLink | Button | Anchor => {
   if (props.kind === 'external-link') return 'a';
@@ -50,13 +52,13 @@ const componentAs = computed((): GlmInternalLink | Button | Anchor => {
 });
 
 const buttonAttrs = computed(() => ({
-  [props.kind === 'button' ? 'disabled' : 'aria-disabled']: props.disabled,
-  tabindex: props.disabled ? -1 : undefined,
+  [props.kind === 'button' ? 'disabled' : 'aria-disabled']: isDisabled.value,
+  tabindex: isDisabled.value ? -1 : undefined,
   [componentAs.value === 'a' ? 'href' : 'to']: props.to,
 }));
 
 function emitClick(event: MouseEvent) {
-  if (!props.disabled && !props.loading) {
+  if (!isDisabled.value && !isLoading.value) {
     emit('click', event);
   } else {
     event.stopImmediatePropagation();
@@ -71,10 +73,9 @@ function emitClick(event: MouseEvent) {
     :class="[
       `glm-button--variant-${variant}`,
       `glm-button--size-${size}`,
+      `glm-button--${status}`,
       {
         'glm-button--only-icon': iconOnly,
-        'glm-button--disabled': disabled,
-        'glm-button--loading': loading,
       },
     ]"
     class="glm-button"
@@ -82,10 +83,10 @@ function emitClick(event: MouseEvent) {
     :aria-labelledby="ariaLabel ? id.label : undefined"
     @click="emitClick"
   >
-    <slot v-if="loading" name="spinner">
+    <slot v-if="isLoading" name="loader">
       <GlmLoader class="glm-button__spinner" />
     </slot>
-    <slot v-if="!loading || !iconOnly" />
+    <slot v-if="!isLoading || !iconOnly" />
     <span v-if="ariaLabel" :id="id.label" class="glm-button__label">{{ ariaLabel }}</span>
   </component>
 </template>

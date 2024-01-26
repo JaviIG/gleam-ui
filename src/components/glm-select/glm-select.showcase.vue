@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 import { CountriesList } from '@/_histoire/mocks/countries';
 import type { ExtractProps } from '@/components/component.utils';
-import { InputSizes, InputStatuses } from '@/components/glm-input/glm-input.utils';
+import { SelectSizes, SelectStatuses } from '@/components/glm-select/glm-select.utils';
 import GlmSelect from '@/components/glm-select/glm-select.vue';
 import { reactive } from 'vue';
 
-const testCases = InputStatuses.flatMap((status) =>
-  InputSizes.flatMap((size) =>
+const testCases = SelectStatuses.flatMap((status) =>
+  SelectSizes.flatMap((size) =>
     [undefined, 'Spain'].flatMap((modelValue) => ({
       props: reactive<ExtractProps<typeof GlmSelect>>({
         status,

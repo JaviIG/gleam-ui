@@ -98,7 +98,7 @@ describe('GlmSelect', () => {
       select.listbox.should('be.visible');
       cy.document()
         .then((doc) => doc.body)
-        .realClick('bottom');
+        .realClick( { position: 'bottom' });
       select.listbox.should('not.exist');
     });
   });
