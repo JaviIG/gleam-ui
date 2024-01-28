@@ -49,6 +49,21 @@ jobs:
       - name: Build project
         run: pnpm build
 
+  build-histoire:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install
+        uses: ./.github/actions/install
+      - name: Build Histoire
+        run: pnpm story:build
+      - name: Upload Histoire dist files
+        uses: actions/upload-artifact@v4
+        with:
+          name: histoire
+          path: .histoire
+
   publish:
     needs: [lint, component-tests, type-check, build]
     runs-on: ubuntu-latest
@@ -58,3 +73,18 @@ jobs:
       - name: Install
         uses: ./.github/actions/install
       - run: echo Publish
+
+  publish-histoire:
+    runs-on: ubuntu-latest
+    needs: [lint, component-tests, type-check, build, build-histoire]
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: histoire
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: d53819673c4e0dc4282dceafde534e5e
+          projectName: gleam-ui
+          directory: dist
