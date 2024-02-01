@@ -1,7 +1,7 @@
 @use './palette' as *;
 
 @function transparentize($color, $amount) {
-  @return color-mix(in lch, #{$color} $amount, rgba(0, 0, 0, 0));
+  @return rgba($color, $amount);
 }
 
 @mixin scrollbar() {

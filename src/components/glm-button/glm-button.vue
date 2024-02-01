@@ -6,7 +6,7 @@ import GlmSpinner from '@/components/icons/glm-spinner.vue';
 import { useId } from '@/composables/id.composable';
 import { isObject } from '@/utils/object';
 import { isInternalLink } from '@/utils/string';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import type { RouteLocationRaw } from 'vue-router';
 
 const props = withDefaults(
@@ -42,6 +42,7 @@ defineSlots<{
 
 const id = useId('glm-button', ['label']);
 
+const controlRef = ref<HTMLElement>();
 const isDisabled = computed(() => props.status === 'disabled');
 const isLoading = computed(() => props.status === 'loading');
 
@@ -65,6 +66,10 @@ function emitClick(event: MouseEvent) {
     event.preventDefault();
   }
 }
+
+defineExpose({
+  controlRef,
+});
 </script>
 
 <template>
@@ -78,6 +83,7 @@ function emitClick(event: MouseEvent) {
         'glm-button--only-icon': iconOnly,
       },
     ]"
+    ref="controlRef"
     class="glm-button"
     v-bind="buttonAttrs"
     :aria-labelledby="ariaLabel ? id.label : undefined"

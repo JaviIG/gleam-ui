@@ -59,7 +59,7 @@ defineSlots<{
     class="glm-segment"
     :class="[`glm-segment--sizes-${size}`, `glm-segment--variant-${variant}`]"
   >
-    <ul ref="listRef" class="glm-segment__list">
+    <ul ref="listRef" class="glm-segment__list" role="group">
       <li v-for="(item, index) in options" :key="index" class="glm-segment__item">
         <button
           :class="{ 'glm-segment__button--active': item === modelValue }"
