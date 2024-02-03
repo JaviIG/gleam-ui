@@ -58,6 +58,8 @@ function focus(event: Event) {
     background: transparent;
     padding: $spacing-s $spacing-xl;
     width: 100%;
+    color: var(--font-color-light);
+    white-space: nowrap;
     &:focus {
       background: transparentize($neutral-95, 10%);
       color: var(--font-color-lightest);
@@ -66,6 +68,5 @@ function focus(event: Event) {
 }
 
 .glm-dropdown-menu-action {
-  color: white;
 }
 </style>

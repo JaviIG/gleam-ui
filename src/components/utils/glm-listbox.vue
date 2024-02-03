@@ -79,35 +79,28 @@ defineExpose({
 </script>
 
 <template>
-  <div :id="ids.listbox" class="glm-listbox-wrapper">
-    <ul ref="listboxRef" class="glm-listbox" role="listbox">
-      <li
-        v-for="(item, index) in items"
-        :id="`${ids.option}-${index}`"
-        :key="getKey(item)"
-        class="glm-listbox__item"
-        :class="{
-          'glm-listbox__item--active': index === activeIndex,
-        }"
-        role="option"
-        @click="emitClick(item)"
-      >
-        <slot name="item" :item="item" />
-      </li>
+  <ul :id="ids.listbox" ref="listboxRef" class="glm-listbox" role="listbox">
+    <li
+      v-for="(item, index) in items"
+      :id="`${ids.option}-${index}`"
+      :key="getKey(item)"
+      class="glm-listbox__item"
+      :class="{
+        'glm-listbox__item--active': index === activeIndex,
+      }"
+      role="option"
+      @click="emitClick(item)"
+    >
+      <slot name="item" :item="item" />
+    </li>
 
-      <li v-if="!items.length" class="glm-listbox__item">
-        <slot name="no-items" />
-      </li>
-    </ul>
-  </div>
+    <li v-if="!items.length" class="glm-listbox__item">
+      <slot name="no-items" />
+    </li>
+  </ul>
 </template>
 
 <style lang="scss">
-.glm-listbox-wrapper {
-  @extend %box-3, %blur-m;
-  border-radius: var(--border-radius-l);
-  overflow: hidden;
-}
 .glm-listbox {
   display: flex;
   flex-flow: column nowrap;

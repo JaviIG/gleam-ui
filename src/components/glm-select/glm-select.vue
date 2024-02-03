@@ -9,6 +9,7 @@ import type {
 import GlmChevronDownIcon from '@/components/icons/glm-chevron-down-icon.vue';
 import GlmExpandTransition from '@/components/transitions/glm-expand-transition.vue';
 import GlmListbox from '@/components/utils/glm-listbox.vue';
+import GlmPopup from '@/components/utils/glm-popup.vue';
 import { useId } from '@/composables/id.composable';
 import { useLooper } from '@/composables/looper.composable';
 import { contains } from '@/utils/string';
@@ -190,26 +191,27 @@ function scrollSelectedItem() {
     </div>
 
     <GlmExpandTransition @after-enter="scrollSelectedItem">
-      <GlmListbox
-        v-show="isOpen"
-        ref="listboxRef"
-        :active-index="activeIndex"
-        :get-key="getKey"
-        :ids="ids"
-        :items="filteredItems"
-        class="glm-select__suggestions"
-        @mousedown.prevent
-        @click:item="selectItem"
-      >
-        <template #item="{ item }">
-          <slot :item="item" name="item">
-            {{ item }}
-          </slot>
-        </template>
-        <template #no-items>
-          <slot name="no-items"> No options match your search</slot>
-        </template>
-      </GlmListbox>
+      <GlmPopup v-if="isOpen" class="glm-select__popup" :trigger="triggerRef">
+        <GlmListbox
+          ref="listboxRef"
+          :active-index="activeIndex"
+          :get-key="getKey"
+          :ids="ids"
+          :items="filteredItems"
+          class="glm-select__suggestions"
+          @mousedown.prevent
+          @click:item="selectItem"
+        >
+          <template #item="{ item }">
+            <slot :item="item" name="item">
+              {{ item }}
+            </slot>
+          </template>
+          <template #no-items>
+            <slot name="no-items"> No options match your search</slot>
+          </template>
+        </GlmListbox>
+      </GlmPopup>
     </GlmExpandTransition>
   </div>
 </template>
@@ -285,11 +287,17 @@ function scrollSelectedItem() {
     font-size: var(--_glm-select-icon-size);
   }
 
-  &__suggestions {
+  &__popup {
+    @extend %box-3, %blur-m;
     position: absolute;
-    top: 100%;
     z-index: 2;
     margin-block: $spacing-m;
+    border-radius: var(--border-radius-l);
+    width: 100%;
+    overflow: hidden;
+  }
+
+  &__suggestions {
     width: 100%;
   }
 

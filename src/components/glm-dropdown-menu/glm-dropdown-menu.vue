@@ -6,8 +6,9 @@ import {
 } from '@/components/glm-dropdown-menu/glm-dropdown-menu.utils';
 import GlmChevronDownIcon from '@/components/icons/glm-chevron-down-icon.vue';
 import GlmExpandTransition from '@/components/transitions/glm-expand-transition.vue';
+import GlmPopup from '@/components/utils/glm-popup.vue';
 import { useId } from '@/composables/id.composable';
-import { computed, provide, ref, watch } from 'vue';
+import { computed, onMounted, provide, ref, watch } from 'vue';
 
 const props = withDefaults(
   defineProps<{
@@ -104,7 +105,11 @@ defineSlots<{ trigger: () => any; items: () => any }>();
       <GlmChevronDownIcon v-if="!iconOnly" class="glm-dropdown-menu__chevron" />
     </GlmButton>
     <glm-expand-transition>
-      <div v-if="isExpanded" class="glm-dropdown-menu__items-list-wrapper">
+      <glm-popup
+        v-if="isExpanded"
+        :trigger="triggerRef?.controlRef"
+        class="glm-dropdown-menu__items-list-wrapper"
+      >
         <ul
           :id="ids.items"
           ref="listRef"
@@ -121,7 +126,7 @@ defineSlots<{ trigger: () => any; items: () => any }>();
         >
           <slot name="items" />
         </ul>
-      </div>
+      </glm-popup>
     </glm-expand-transition>
   </div>
 </template>
