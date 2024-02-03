@@ -1,4 +1,4 @@
-import { GlmInternalLink } from '@/components/component.utils';
+import { GlmInternalLink } from './components/component.utils';
 import type { Component, Plugin } from 'vue';
 
 export const GleamPlugin: Plugin<GleamPluginOptions> = {

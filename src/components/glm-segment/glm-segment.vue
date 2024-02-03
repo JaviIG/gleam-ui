@@ -1,5 +1,5 @@
 <script generic="T" lang="ts" setup>
-import type { SegmentSize, SegmentVariant } from '@/components/glm-segment/glm-segment.utils';
+import type { SegmentSize, SegmentVariant } from './glm-segment.utils';
 import { computed, nextTick, ref, watch } from 'vue';
 
 const props = withDefaults(

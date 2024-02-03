@@ -1,7 +1,7 @@
 import GlmSwitchShowcase from './glm-switch.showcase.vue';
 import GlmSwitch from './glm-switch.vue';
-import type { ExtractProps } from '@/components/component.utils';
-import { GleamPlugin, type GleamPluginOptions } from '@/gleam.plugin';
+import type { ExtractProps } from '../component.utils';
+import { GleamPlugin, type GleamPluginOptions } from '../../gleam.plugin';
 import { ref } from 'vue';
 
 export type RenderOptions = {

@@ -1,13 +1,12 @@
 <script lang="ts" setup>
+import type { ExtractProps } from '../component.utils';
+import GlmLike from '../icons/glm-like.vue';
+import GlmDropdownMenuGroup from './glm-dropdown-menu-group.vue';
+import GlmDropdownMenuItem from './glm-dropdown-menu-item.vue';
+import { DropdownMenuVariants } from './glm-dropdown-menu.utils';
 import GlmDropdownMenu from './glm-dropdown-menu.vue';
-import type { ExtractProps } from '@/components/component.utils';
-import GlmDropdownMenuGroup from '@/components/glm-dropdown-menu/glm-dropdown-menu-group.vue';
-import GlmDropdownMenuItem from '@/components/glm-dropdown-menu/glm-dropdown-menu-item.vue';
-import { DropdownMenuVariants } from '@/components/glm-dropdown-menu/glm-dropdown-menu.utils';
-import GlmLike from '@/components/icons/glm-like.vue';
 import { reactive } from 'vue';
 
-const options = ['Small', 'Medium', 'Large'];
 const testCases = DropdownMenuVariants.flatMap((variant) =>
   [true, false].flatMap((iconOnly) => ({
     props: reactive<ExtractProps<typeof GlmDropdownMenu>>({
@@ -29,15 +28,15 @@ function getTitle(props: ExtractProps<typeof GlmDropdownMenu>) {
     <GlmDropdownMenu
       v-for="({ props }, index) in testCases"
       :key="index"
-      v-bind="props"
       :title="getTitle(props)"
       data-testid="glm-dropdown-menu"
+      v-bind="props"
     >
       <template #trigger>
         <template v-if="props.iconOnly">
           <GlmLike />
         </template>
-        <template v-else> User </template>
+        <template v-else> User</template>
       </template>
 
       <template #items>

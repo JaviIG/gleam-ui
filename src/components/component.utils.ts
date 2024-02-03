@@ -1,4 +1,4 @@
-import type { CleanRecord } from '@/utils/base.types';
+import type { CleanRecord } from '../utils/base.types';
 
 export type LinkKind = ExternalLink | InternalLink;
 export type ExternalLink = 'external-link';

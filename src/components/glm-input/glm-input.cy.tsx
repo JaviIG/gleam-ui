@@ -1,7 +1,7 @@
 import GlmInput from './glm-input.vue';
-import type { ExtractProps, ExtractSlots } from '@/components/component.utils';
-import GlmInputShowcase from '@/components/glm-input/glm-input.showcase.vue';
-import { GleamPlugin, type GleamPluginOptions } from '@/gleam.plugin';
+import type { ExtractProps, ExtractSlots } from '../component.utils';
+import GlmInputShowcase from './glm-input.showcase.vue';
+import { GleamPlugin, type GleamPluginOptions } from '../../gleam.plugin';
 import { type MaybeRef, ref, unref } from 'vue';
 
 export type RenderOptions = {

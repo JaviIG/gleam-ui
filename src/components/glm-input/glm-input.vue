@@ -1,14 +1,10 @@
 <script lang="ts" setup>
-import type { ButtonSize, ButtonStatus } from '@/components/glm-button/glm-button.utils';
-import GlmButton from '@/components/glm-button/glm-button.vue';
-import type {
-  InputSize,
-  InputStatus,
-  InputGenericSlotScope,
-} from '@/components/glm-input/glm-input.utils';
-import GlmLoader from '@/components/glm-loader/glm-loader.vue';
-import GlmClear from '@/components/icons/glm-clear.vue';
-import { useId } from '@/composables/id.composable';
+import { useId } from '../../composables/id.composable';
+import type { ButtonSize, ButtonStatus } from '../glm-button/glm-button.utils';
+import GlmButton from '../glm-button/glm-button.vue';
+import GlmLoader from '../glm-loader/glm-loader.vue';
+import GlmClear from '../icons/glm-clear.vue';
+import type { InputSize, InputStatus, InputGenericSlotScope } from './glm-input.utils';
 import { computed, readonly, ref } from 'vue';
 
 const props = withDefaults(

@@ -1,12 +1,8 @@
 <script lang="ts" setup>
+import GlmLike from '../icons/glm-like.vue';
 import GlmButtonShowcase from './glm-button.showcase.vue';
+import { ButtonSizes, ButtonStatuses, ButtonVariants } from './glm-button.utils';
 import GlmButton from './glm-button.vue';
-import {
-  ButtonSizes,
-  ButtonStatuses,
-  ButtonVariants,
-} from '@/components/glm-button/glm-button.utils';
-import GlmLike from '@/components/icons/glm-like.vue';
 import { logEvent } from 'histoire/client';
 import { reactive } from 'vue';
 

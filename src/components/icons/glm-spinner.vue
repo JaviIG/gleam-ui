@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import GlmSvgIcon from '@/components/icons/glm-svg-icon.vue';
+import GlmSvgIcon from './glm-svg-icon.vue';
 </script>
 
 <template>

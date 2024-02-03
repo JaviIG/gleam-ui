@@ -1,4 +1,4 @@
-import GlmPopup from '@/components/utils/glm-popup.vue';
+import GlmPopup from './glm-popup.vue';
 import { ref } from 'vue';
 
 type Position =

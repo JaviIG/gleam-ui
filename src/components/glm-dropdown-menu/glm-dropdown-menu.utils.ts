@@ -1,4 +1,4 @@
-import { ButtonVariants } from '@/components/glm-button/glm-button.utils';
+import { ButtonVariants } from '../glm-button/glm-button.utils';
 import type { InjectionKey } from 'vue';
 
 export const DropdownMenuVariants = ButtonVariants;

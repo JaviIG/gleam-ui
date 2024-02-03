@@ -1,12 +1,8 @@
 <script setup lang="ts">
-import type { ExtractProps } from '@/components/component.utils';
-import {
-  ButtonSizes,
-  ButtonStatuses,
-  ButtonVariants,
-} from '@/components/glm-button/glm-button.utils';
-import GlmButton from '@/components/glm-button/glm-button.vue';
-import GlmLike from '@/components/icons/glm-like.vue';
+import type { ExtractProps } from '../component.utils';
+import GlmLike from '../icons/glm-like.vue';
+import { ButtonSizes, ButtonStatuses, ButtonVariants } from './glm-button.utils';
+import GlmButton from './glm-button.vue';
 
 const testCases = ButtonVariants.flatMap((variant) =>
   ButtonStatuses.flatMap((status) =>

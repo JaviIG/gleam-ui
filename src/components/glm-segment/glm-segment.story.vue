@@ -1,8 +1,8 @@
 <script lang="ts" setup>
+import type { ExtractProps } from '../component.utils';
 import GlmSegmentShowcase from './glm-segment.showcase.vue';
-import type { ExtractProps } from '@/components/component.utils';
-import { SegmentSizes, SegmentVariants } from '@/components/glm-segment/glm-segment.utils';
-import GlmSegment from '@/components/glm-segment/glm-segment.vue';
+import { SegmentSizes, SegmentVariants } from './glm-segment.utils';
+import GlmSegment from './glm-segment.vue';
 import { reactive } from 'vue';
 
 type Props = ExtractProps<typeof GlmSegment<string>>;

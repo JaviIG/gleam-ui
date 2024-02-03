@@ -1,10 +1,10 @@
 <script lang="ts" setup>
+import { useId } from '../../composables/id.composable';
+import { isObject } from '../../utils/object';
+import { isInternalLink } from '../../utils/string';
 import { type Anchor, type Button, GlmInternalLink, type LinkKind } from '../component.utils';
+import GlmLoader from '../glm-loader/glm-loader.vue';
 import type { ButtonSize, ButtonStatus, ButtonVariant } from './glm-button.utils';
-import GlmLoader from '@/components/glm-loader/glm-loader.vue';
-import { useId } from '@/composables/id.composable';
-import { isObject } from '@/utils/object';
-import { isInternalLink } from '@/utils/string';
 import { computed, ref } from 'vue';
 import type { RouteLocationRaw } from 'vue-router';
 

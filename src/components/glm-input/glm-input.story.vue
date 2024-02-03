@@ -1,15 +1,10 @@
 <script lang="ts" setup>
-import {
-  ButtonSizes,
-  ButtonStatuses,
-  ButtonVariants,
-} from '@/components/glm-button/glm-button.utils';
-import GlmButton from '@/components/glm-button/glm-button.vue';
-import GlmInputShowcase from '@/components/glm-input/glm-input.showcase.vue';
-import { InputSizes, InputStatuses } from '@/components/glm-input/glm-input.utils';
-import GlmInput from '@/components/glm-input/glm-input.vue';
-import GlmLike from '@/components/icons/glm-like.vue';
-import GlmSearch from '@/components/icons/glm-search.vue';
+import GlmButton from '../glm-button/glm-button.vue';
+import GlmLike from '../icons/glm-like.vue';
+import GlmSearch from '../icons/glm-search.vue';
+import GlmInputShowcase from './glm-input.showcase.vue';
+import { InputSizes, InputStatuses } from './glm-input.utils';
+import GlmInput from './glm-input.vue';
 import { reactive } from 'vue';
 
 type Props = InstanceType<typeof GlmInput>['$props'];

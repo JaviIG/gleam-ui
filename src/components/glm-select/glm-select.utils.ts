@@ -1,4 +1,4 @@
-import { InputSizes, InputStatuses } from '@/components/glm-input/glm-input.utils';
+import { InputSizes, InputStatuses } from '../glm-input/glm-input.utils';
 
 export type SelectLoaderSlotScope = {
   iconProps: {

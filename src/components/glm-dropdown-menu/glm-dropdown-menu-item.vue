@@ -1,5 +1,5 @@
 <script generic="T" lang="ts" setup>
-import { DropdownApiKey } from '@/components/glm-dropdown-menu/glm-dropdown-menu.utils';
+import { DropdownApiKey } from './glm-dropdown-menu.utils';
 import { inject } from 'vue';
 
 const props = withDefaults(

@@ -1,9 +1,9 @@
 import GlmDropdownMenuShowcase from './glm-dropdown-menu.showcase.vue';
 import GlmDropdownMenu from './glm-dropdown-menu.vue';
-import type { ExtractProps, ExtractSlots } from '@/components/component.utils';
-import GlmDropdownMenuGroup from '@/components/glm-dropdown-menu/glm-dropdown-menu-group.vue';
-import GlmDropdownMenuItem from '@/components/glm-dropdown-menu/glm-dropdown-menu-item.vue';
-import { GleamPlugin, type GleamPluginOptions } from '@/gleam.plugin';
+import type { ExtractProps, ExtractSlots } from '../component.utils';
+import GlmDropdownMenuGroup from './glm-dropdown-menu-group.vue';
+import GlmDropdownMenuItem from './glm-dropdown-menu-item.vue';
+import { GleamPlugin, type GleamPluginOptions } from '../../gleam.plugin';
 
 export type RenderOptions = {
   props?: ExtractProps<typeof GlmDropdownMenu>;

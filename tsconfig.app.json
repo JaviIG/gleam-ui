@@ -7,8 +7,5 @@
     "noEmit": true,
     "baseUrl": ".",
     "lib": ["dom", "esnext"],
-    "paths": {
-      "@/*": ["./src/*"]
-    }
   }
 }

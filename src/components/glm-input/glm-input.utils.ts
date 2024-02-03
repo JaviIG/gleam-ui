@@ -1,5 +1,5 @@
-import type { ExtractProps } from '@/components/component.utils';
-import GlmButton from '@/components/glm-button/glm-button.vue';
+import type { ExtractProps } from '../component.utils';
+import GlmButton from '../glm-button/glm-button.vue';
 
 export const InputSizes = ['m', 'l'] as const;
 export type InputSize = (typeof InputSizes)[number];

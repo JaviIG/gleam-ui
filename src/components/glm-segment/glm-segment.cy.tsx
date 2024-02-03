@@ -1,7 +1,7 @@
 import GlmSegmentShowcase from './glm-segment.showcase.vue';
 import GlmSegment from './glm-segment.vue';
-import type { ExtractProps, ExtractSlots } from '@/components/component.utils';
-import { GleamPlugin, type GleamPluginOptions } from '@/gleam.plugin';
+import type { ExtractProps, ExtractSlots } from '../component.utils';
+import { GleamPlugin, type GleamPluginOptions } from '../../gleam.plugin';
 import { type Ref, ref } from 'vue';
 
 export type RenderOptions<SomeKind> = {

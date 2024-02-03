@@ -1,18 +1,14 @@
 <script generic="T extends string" lang="ts" setup>
-import type { ExtractExposed } from '@/components/component.utils';
-import GlmLoader from '@/components/glm-loader/glm-loader.vue';
-import type {
-  SelectLoaderSlotScope,
-  SelectSize,
-  SelectStatus,
-} from '@/components/glm-select/glm-select.utils';
-import GlmChevronDownIcon from '@/components/icons/glm-chevron-down-icon.vue';
-import GlmExpandTransition from '@/components/transitions/glm-expand-transition.vue';
-import GlmListbox from '@/components/utils/glm-listbox.vue';
-import GlmPopup from '@/components/utils/glm-popup.vue';
-import { useId } from '@/composables/id.composable';
-import { useLooper } from '@/composables/looper.composable';
-import { contains } from '@/utils/string';
+import { useId } from '../../composables/id.composable';
+import { useLooper } from '../../composables/looper.composable';
+import { contains } from '../../utils/string';
+import type { ExtractExposed } from '../component.utils';
+import GlmLoader from '../glm-loader/glm-loader.vue';
+import GlmChevronDownIcon from '../icons/glm-chevron-down-icon.vue';
+import GlmExpandTransition from '../transitions/glm-expand-transition.vue';
+import GlmListbox from '../utils/glm-listbox.vue';
+import GlmPopup from '../utils/glm-popup.vue';
+import type { SelectLoaderSlotScope, SelectSize, SelectStatus } from './glm-select.utils';
 import { computed, nextTick, ref } from 'vue';
 
 const props = withDefaults(

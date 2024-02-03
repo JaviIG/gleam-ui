@@ -1,7 +1,7 @@
 <script lang="ts" setup>
+import type { ExtractProps } from '../component.utils';
 import { SwitchStatuses } from './glm-switch.utils';
-import type { ExtractProps } from '@/components/component.utils';
-import GlmSwitch from '@/components/glm-switch/glm-switch.vue';
+import GlmSwitch from './glm-switch.vue';
 import { reactive } from 'vue';
 
 const testCases = SwitchStatuses.flatMap((status) =>

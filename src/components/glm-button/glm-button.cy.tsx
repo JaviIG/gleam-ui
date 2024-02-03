@@ -1,8 +1,8 @@
 import GlmButton from './glm-button.vue';
-import type { ExtractProps, ExtractSlots } from '@/components/component.utils';
-import GlmButtonShowcase from '@/components/glm-button/glm-button.showcase.vue';
-import GlmLike from '@/components/icons/glm-like.vue';
-import { GleamPlugin, type GleamPluginOptions } from '@/gleam.plugin';
+import type { ExtractProps, ExtractSlots } from '../component.utils';
+import GlmButtonShowcase from './glm-button.showcase.vue';
+import GlmLike from '../icons/glm-like.vue';
+import { GleamPlugin, type GleamPluginOptions } from '../../gleam.plugin';
 import { RouterLink, createRouter, createMemoryHistory } from 'vue-router';
 
 export type RenderOptions = {

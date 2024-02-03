@@ -1,8 +1,8 @@
 import GlmSelect from './glm-select.vue';
-import { CountriesList } from '@/_histoire/mocks/countries';
-import type { ExtractProps, ExtractSlots } from '@/components/component.utils';
-import GlmSelectShowcase from '@/components/glm-select/glm-select.showcase.vue';
-import { GleamPlugin, type GleamPluginOptions } from '@/gleam.plugin';
+import { CountriesList } from '../../_histoire/mocks/countries';
+import type { ExtractProps, ExtractSlots } from '../component.utils';
+import GlmSelectShowcase from './glm-select.showcase.vue';
+import { GleamPlugin, type GleamPluginOptions } from '../../gleam.plugin';
 import { ref } from 'vue';
 
 export type RenderOptions = {

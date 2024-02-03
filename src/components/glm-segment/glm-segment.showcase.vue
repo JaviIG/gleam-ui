@@ -1,7 +1,7 @@
 <script lang="ts" setup>
+import type { ExtractProps } from '../component.utils';
 import { SegmentSizes, SegmentVariants } from './glm-segment.utils';
 import GlmSegment from './glm-segment.vue';
-import type { ExtractProps } from '@/components/component.utils';
 import { reactive } from 'vue';
 
 const options = ['Small', 'Medium', 'Large'];

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { ExtractProps } from '@/components/component.utils';
-import GlmButton from '@/components/glm-button/glm-button.vue';
-import { InputSizes, InputStatuses } from '@/components/glm-input/glm-input.utils';
-import GlmInput from '@/components/glm-input/glm-input.vue';
-import GlmFileIcon from '@/components/icons/glm-file-icon.vue';
-import GlmSearch from '@/components/icons/glm-search.vue';
+import type { ExtractProps } from '../component.utils';
+import GlmButton from '../glm-button/glm-button.vue';
+import GlmFileIcon from '../icons/glm-file-icon.vue';
+import GlmSearch from '../icons/glm-search.vue';
+import { InputSizes, InputStatuses } from './glm-input.utils';
+import GlmInput from './glm-input.vue';
 
 const testCases = InputStatuses.flatMap((status) =>
   InputSizes.flatMap((size) =>

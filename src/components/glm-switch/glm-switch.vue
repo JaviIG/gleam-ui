@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { SwitchStatus } from '@/components/glm-switch/glm-switch.utils';
+import type { SwitchStatus } from './glm-switch.utils';
 
 const props = withDefaults(
   defineProps<{

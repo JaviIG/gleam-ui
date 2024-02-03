@@ -1,7 +1,7 @@
 <script lang="ts" setup>
+import type { ExtractProps } from '../component.utils';
 import GlmSwitchShowcase from './glm-switch.showcase.vue';
 import GlmSwitch from './glm-switch.vue';
-import type { ExtractProps } from '@/components/component.utils';
 import { reactive } from 'vue';
 
 type Props = ExtractProps<typeof GlmSwitch>;

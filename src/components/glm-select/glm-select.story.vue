@@ -1,10 +1,10 @@
 <script lang="ts" setup>
+import { CountriesList } from '../../_histoire/mocks/countries';
+import type { ExtractProps } from '../component.utils';
+import GlmLike from '../icons/glm-like.vue';
 import GlmSelectShowcase from './glm-select.showcase.vue';
 import { SelectSizes, SelectStatuses } from './glm-select.utils';
 import GlmSelect from './glm-select.vue';
-import { CountriesList } from '@/_histoire/mocks/countries';
-import type { ExtractProps } from '@/components/component.utils';
-import GlmLike from '@/components/icons/glm-like.vue';
 import { reactive } from 'vue';
 
 type Props = ExtractProps<typeof GlmSelect<string>>;

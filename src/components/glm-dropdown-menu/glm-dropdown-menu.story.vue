@@ -1,10 +1,10 @@
 <script lang="ts" setup>
+import type { ExtractProps } from '../component.utils';
 import GlmDropdownMenuGroup from './glm-dropdown-menu-group.vue';
 import GlmDropdownMenuItem from './glm-dropdown-menu-item.vue';
 import GlmDropdownMenuShowcase from './glm-dropdown-menu.showcase.vue';
 import { DropdownMenuVariants } from './glm-dropdown-menu.utils';
 import GlmDropdownMenu from './glm-dropdown-menu.vue';
-import type { ExtractProps } from '@/components/component.utils';
 import { logEvent } from 'histoire/client';
 import { reactive } from 'vue';
 

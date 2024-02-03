@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import GlmLoader from '@/components/glm-loader/glm-loader.vue';
+import GlmLoader from './glm-loader.vue';
 </script>
 <template>
   <Story auto-props-disabled title="GlmLoader">
