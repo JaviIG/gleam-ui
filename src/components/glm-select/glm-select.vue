@@ -276,6 +276,7 @@ function scrollSelectedItem() {
   &__loader {
     grid-area: loader;
     margin-inline: $spacing-2xs;
+    height: 2em;
   }
 
   &__chevron {

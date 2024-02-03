@@ -207,6 +207,7 @@ defineSlots<{
 
   &__loader {
     margin-inline: $spacing-2xs;
+    height: 2em;
   }
 
   // Sizes

@@ -3,58 +3,52 @@ const items = 3;
 </script>
 
 <template>
-  <div class="glm-loader">
-    <div
+  <svg class="" viewBox="0 0 64 64">
+    <filter id="blur">
+      <feGaussianBlur stdDeviation="5" in="SourceGraphic" result="BLUR"></feGaussianBlur>
+    </filter>
+
+    <circle class="glm-loader__background" cx="32" cy="32" r="32" fill="red" />
+    <rect
       v-for="item in items"
       :key="item"
-      class="glm-loader__item"
       :style="{ '--_glm-loader-item-index': item }"
+      class="glm-loader__item"
+      width="32"
+      height="32"
+      rx="8"
+      x="16"
+      y="16"
     />
-  </div>
+  </svg>
 </template>
 
 <style scoped lang="scss">
 .glm-loader {
-  position: relative;
-  gap: 4px;
-  border-radius: var(--border-radius-pill);
-  background: var(--background-color-3);
-  padding: 0.2rem;
-  width: 2rem;
-  height: 2rem;
+  aspect-ratio: 1;
 
+  &__background {
+    fill: var(--background-color-3);
+  }
   &__item {
-    position: absolute;
-    animation: loader infinite 0.75s calc(-0.25s * var(--_glm-loader-item-index)) ease-in-out
+    //transform: translateY(calc(8px * (2 - var(--_glm-loader-item-index, 0)))) rotateX(45deg) rotateZ(45deg);
+    transform-origin: 32px 32px;
+    animation: loader infinite 0.75s calc(-0.25s * var(--_glm-loader-item-index, 0)) ease-in-out
       alternate;
-    inset: 0.3rem;
-    inset-block: calc((var(--_glm-loader-item-index) * -0.3rem) + 0.9rem);
-    width: 1.4rem;
-    height: 1.4rem;
-
-    &:after {
-      display: block;
-      transform: rotateX(45deg) rotateZ(45deg);
-      backdrop-filter: blur(2px) brightness(1.5) saturate(1.75);
-      border-radius: 0.25rem;
-      background: transparentize($primary-50, 50%);
-      width: 100%;
-      height: 100%;
-      content: '';
-    }
-
-    &:nth-child(2) {
-    }
+    fill: transparentize($primary-50, 50%);
+    mix-blend-mode: screen;
   }
 }
 
 @keyframes loader {
   0% {
-    transform: scale(0.5);
+    transform: translateY(calc(8px * (2 - var(--_glm-loader-item-index, 0)))) rotateX(45deg)
+      rotateZ(45deg) scale(0.75);
   }
 
   100% {
-    transform: scale(0.75);
+    transform: translateY(calc(8px * (2 - var(--_glm-loader-item-index, 0)))) rotateX(45deg)
+      rotateZ(45deg) scale(1);
   }
 }
 </style>

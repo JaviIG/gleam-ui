@@ -1,8 +1,7 @@
 <script lang="ts" setup>
 import { type Anchor, type Button, GlmInternalLink, type LinkKind } from '../component.utils';
-import type { ButtonSize, ButtonStatus, ButtonStatuses, ButtonVariant } from './glm-button.utils';
+import type { ButtonSize, ButtonStatus, ButtonVariant } from './glm-button.utils';
 import GlmLoader from '@/components/glm-loader/glm-loader.vue';
-import GlmSpinner from '@/components/icons/glm-spinner.vue';
 import { useId } from '@/composables/id.composable';
 import { isObject } from '@/utils/object';
 import { isInternalLink } from '@/utils/string';
@@ -75,6 +74,8 @@ defineExpose({
 <template>
   <component
     :is="componentAs"
+    ref="controlRef"
+    :aria-labelledby="ariaLabel ? id.label : undefined"
     :class="[
       `glm-button--variant-${variant}`,
       `glm-button--size-${size}`,
@@ -83,14 +84,12 @@ defineExpose({
         'glm-button--only-icon': iconOnly,
       },
     ]"
-    ref="controlRef"
     class="glm-button"
     v-bind="buttonAttrs"
-    :aria-labelledby="ariaLabel ? id.label : undefined"
     @click="emitClick"
   >
     <slot v-if="isLoading" name="loader">
-      <GlmLoader class="glm-button__spinner" />
+      <GlmLoader class="glm-button__loader" />
     </slot>
     <slot v-if="!isLoading || !iconOnly" />
     <span v-if="ariaLabel" :id="id.label" class="glm-button__label">{{ ariaLabel }}</span>
@@ -121,6 +120,11 @@ defineExpose({
 
   &__label {
     @include sr-only();
+  }
+
+  &__loader {
+    transform: scale(1.25);
+    height: var(--_glm-button-icon-font-size);
   }
 
   // Theme variants
@@ -202,6 +206,7 @@ defineExpose({
     --_glm-button-shadow-blur: 1rem;
     --_glm-button-background: var(--_glm-button-background-hover);
   }
+
   &:focus-visible {
     @include outline();
   }

@@ -29,8 +29,8 @@ export function renderButton({ props = {}, slots }: RenderOptions) {
     get root() {
       return cy.get('.glm-button');
     },
-    get spinner() {
-      return cy.get('.glm-button__spinner');
+    get loader() {
+      return cy.get('.glm-button__loader');
     },
   };
 }
@@ -72,14 +72,14 @@ describe('GlmButton', () => {
       .should('be.equal', 'A');
   });
 
-  it('adds an spinner when loading', () => {
+  it('adds an loader when loading', () => {
     const button = renderButton({
       props: {
         status: 'loading',
       },
       slots: { default: () => 'Click Me' },
     });
-    button.spinner.should('be.visible');
+    button.loader.should('be.visible');
     button.root.should('have.text', 'Click Me');
   });
 
@@ -91,7 +91,7 @@ describe('GlmButton', () => {
       },
       slots: { default: () => <GlmLike data-testId="custom-icon" /> },
     });
-    button.spinner.should('be.visible');
+    button.loader.should('be.visible');
     cy.getByTestId('custom-icon').should('not.exist');
   });
 
