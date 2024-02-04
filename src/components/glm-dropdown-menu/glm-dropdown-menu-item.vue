@@ -12,7 +12,7 @@ const props = withDefaults(
 const emit = defineEmits<{
   click: [MouseEvent];
 }>();
-const slots = defineSlots<{
+defineSlots<{
   default: () => any;
 }>();
 

@@ -48,6 +48,8 @@ jobs:
         uses: ./.github/actions/install
       - name: Build project
         run: pnpm build
+      - name: Generate types
+        run: pnpm type:gen
 
   build-histoire:
     runs-on: ubuntu-latest
@@ -63,6 +65,11 @@ jobs:
         with:
           name: histoire
           path: .histoire
+      - name: Upload Histoire dist files
+        uses: actions/upload-artifact@v4
+        with:
+          name: histoire
+          path: .histoire
 
   publish:
     needs: [lint, component-tests, type-check, build]
@@ -72,7 +79,11 @@ jobs:
         uses: actions/checkout@v3
       - name: Install
         uses: ./.github/actions/install
-      - run: echo Publish
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: pnpm release
 
   publish-histoire:
     runs-on: ubuntu-latest

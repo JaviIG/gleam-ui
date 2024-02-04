@@ -1,0 +1,9 @@
+{
+  "branches": [
+    {
+      "name": "master",
+      "prerelease": "alpha"
+    }
+  ],
+  "dryRun": true
+}

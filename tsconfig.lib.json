@@ -1,0 +1,21 @@
+{
+  "extends": "./tsconfig.app.json",
+  "exclude": [
+    "src/**/__tests__/*",
+    "src/**/*.App.vue",
+    "src/**/*.main.ts",
+    "src/**/*.spec.ts",
+    "src/_histoire/**/*",
+    "**/*.story.vue",
+    "**/*.showcase.vue",
+    "cypress/**/*",
+    "**/*.cy.tsx"
+  ],
+  "compilerOptions": {
+    "composite": false,
+    "emitDeclarationOnly": true,
+    "declaration": true,
+    "declarationDir": "./dist/types",
+    "noEmit": false
+  }
+}

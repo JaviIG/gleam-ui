@@ -5,7 +5,7 @@ import GlmButton from '../glm-button/glm-button.vue';
 import GlmLoader from '../glm-loader/glm-loader.vue';
 import GlmClear from '../icons/glm-clear.vue';
 import type { InputSize, InputStatus, InputGenericSlotScope } from './glm-input.utils';
-import { computed, readonly, ref } from 'vue';
+import { computed, ref } from 'vue';
 
 const props = withDefaults(
   defineProps<{

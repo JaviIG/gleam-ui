@@ -5,7 +5,7 @@ import GlmChevronDownIcon from '../icons/glm-chevron-down-icon.vue';
 import GlmExpandTransition from '../transitions/glm-expand-transition.vue';
 import GlmPopup from '../utils/glm-popup.vue';
 import { DropdownApiKey, type DropdownMenuVariant } from './glm-dropdown-menu.utils';
-import { computed, onMounted, provide, ref, watch } from 'vue';
+import { computed, provide, ref, watch } from 'vue';
 
 const props = withDefaults(
   defineProps<{

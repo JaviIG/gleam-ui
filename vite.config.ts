@@ -3,10 +3,9 @@ import vueJsxPlugin from '@vitejs/plugin-vue-jsx';
 import { resolve } from 'node:path';
 import { fileURLToPath, URL } from 'node:url';
 import { defineConfig } from 'vite';
-import dtsPlugin from 'vite-plugin-dts';
 
 export default defineConfig({
-  plugins: [vue(), vueJsxPlugin(), dtsPlugin({ rollupTypes: true })],
+  plugins: [vue(), vueJsxPlugin()],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
@@ -22,6 +21,8 @@ export default defineConfig({
   },
 
   build: {
+    minify: false,
+    cssMinify: false,
     lib: {
       // Could also be a dictionary or array of multiple entry points
       entry: resolve(__dirname, 'src/index.ts'),
