@@ -1,9 +1,10 @@
 {
   "branches": [
+    "master",
     {
-      "name": "master",
-      "prerelease": "alpha"
+      "name": "next",
+      "channel": "next",
+      "prerelease": "next"
     }
-  ],
-  "dryRun": true
+  ]
 }
