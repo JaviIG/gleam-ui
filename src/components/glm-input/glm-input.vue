@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { useId } from '../../composables/id.composable';
+import type { MaybeArray } from '../../utils/base.types';
 import type { ButtonSize, ButtonStatus } from '../glm-button/glm-button.utils';
 import GlmButton from '../glm-button/glm-button.vue';
 import GlmLoader from '../glm-loader/glm-loader.vue';
@@ -7,12 +8,14 @@ import GlmClear from '../icons/glm-clear.vue';
 import type { InputSize, InputStatus, InputGenericSlotScope } from './glm-input.utils';
 import { computed, ref } from 'vue';
 
+defineOptions({ inheritAttrs: false });
 const props = withDefaults(
   defineProps<{
     size?: InputSize;
-    type?: 'email' | 'date' | 'text' | 'password' | 'search' | 'tel' | 'url' | 'time';
+    type?: 'number' | 'email' | 'date' | 'text' | 'password' | 'search' | 'tel' | 'url' | 'time';
     status?: InputStatus;
     clearAriaLabel?: string;
+    inputClass?: MaybeArray<string | Record<string, boolean>>;
   }>(),
   {
     size: 'm',
@@ -25,13 +28,11 @@ const props = withDefaults(
 const emit = defineEmits<{
   blur: [FocusEvent];
   focus: [FocusEvent];
-  keydown: [KeyboardEvent];
-  keyup: [KeyboardEvent];
 }>();
 
-const modelValue = defineModel<string>();
+const modelValue = defineModel<string | number>();
 
-const isEmpty = computed(() => !modelValue.value);
+const isEmpty = computed(() => modelValue.value === '' || modelValue.value == null);
 
 const id = useId('glm-input', ['placeholder']);
 
@@ -87,14 +88,6 @@ function onFocus(event: FocusEvent) {
   emit('focus', event);
 }
 
-function onKeydown(event: KeyboardEvent) {
-  emit('keydown', event);
-}
-
-function onKeyup(event: KeyboardEvent) {
-  emit('keyup', event);
-}
-
 defineExpose({
   id,
   hasFocus,
@@ -125,13 +118,13 @@ defineSlots<{
       ref="controlRef"
       v-model="modelValue"
       class="glm-input__control"
-      type="text"
+      :class="inputClass"
+      :type="type"
       :aria-describedby="id.placeholder"
       :readonly="status === 'readonly'"
+      v-bind="$attrs"
       @focus="onFocus"
       @blur="onBlur"
-      @keydown="onKeydown"
-      @keyup="onKeyup"
     />
     <div class="glm-input__end">
       <slot v-if="status === 'loading'" name="loader" v-bind="slotScope">

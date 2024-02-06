@@ -1,19 +1,25 @@
-import GlmInput from './glm-input.vue';
+import { GleamPlugin, type GleamPluginOptions } from '../../gleam.plugin';
 import type { ExtractProps, ExtractSlots } from '../component.utils';
 import GlmInputShowcase from './glm-input.showcase.vue';
-import { GleamPlugin, type GleamPluginOptions } from '../../gleam.plugin';
-import { type MaybeRef, ref, unref } from 'vue';
+import GlmInput from './glm-input.vue';
+import { ref } from 'vue';
 
 export type RenderOptions = {
-  props: Omit<ExtractProps<typeof GlmInput>, 'modelValue'> & { modelValue?: MaybeRef<string> };
+  props: ExtractProps<typeof GlmInput>;
   slots: ExtractSlots<typeof GlmInput>;
 };
 
 export function renderInput({ props: { modelValue, ...props } = {}, slots }: RenderOptions) {
   const options: GleamPluginOptions = {};
+  const modelValueRef = ref(modelValue);
   cy.mount(
     () => (
-      <GlmInput modelValue={unref(modelValue)} {...props}>
+      <GlmInput
+        modelValue={modelValueRef.value}
+        {...props}
+        // @ts-expect-error `defineModel` inference is failing
+        onUpdate:modelValue={(value: string) => (modelValueRef.value = value)}
+      >
         {slots}
       </GlmInput>
     ),
@@ -24,6 +30,9 @@ export function renderInput({ props: { modelValue, ...props } = {}, slots }: Ren
     }
   );
   return {
+    get value() {
+      return cy.wrap(modelValueRef).its('value');
+    },
     get root() {
       return cy.get('.glm-input');
     },
@@ -41,19 +50,16 @@ export function renderInput({ props: { modelValue, ...props } = {}, slots }: Ren
 
 describe('GlmInput', () => {
   it('updates value', () => {
-    const modelValue = ref('First');
     const input = renderInput({
       props: {
-        modelValue,
-        // @ts-expect-error `defineModel` inference is failing
-        'onUpdate:modelValue': (value: string) => (modelValue.value = value),
+        modelValue: 'First',
       },
       slots: { placeholder: () => 'Type something' },
     });
     input.input.should('have.value', 'First');
     input.input.type(' Second');
     input.input.should('have.value', 'First Second');
-    cy.wrap(modelValue).should('have.property', 'value', 'First Second');
+    input.value.should('equal','First Second');
   });
 
   it('renders placeholder', () => {
@@ -68,27 +74,20 @@ describe('GlmInput', () => {
   });
 
   it('clears and focus the input when clicking the clear button', () => {
-    const modelValue = ref('');
     const input = renderInput({
       props: {
-        modelValue,
-        // @ts-expect-error `defineModel` inference is failing
-        'onUpdate:modelValue': (value: string) => (modelValue.value = value),
+        modelValue: '',
       },
       slots: { placeholder: () => 'Type something' },
     });
 
     input.input.realClick().type('Something').blur();
-    input.input.should(($input) => {
-      expect($input[0].ownerDocument.activeElement).to.be.equal($input[0].ownerDocument.body);
-    });
-    cy.wrap(modelValue).should('have.property', 'value', 'Something');
+    input.input.should('not.have.focus');
+    input.value.should('equal', 'Something');
 
     input.clearInput.realClick();
-    input.input.should('have.value', '').should(($input) => {
-      expect($input[0].ownerDocument.activeElement).to.be.equal($input[0]);
-    });
-    cy.wrap(modelValue).should('have.property', 'value', '');
+    input.input.should('have.value', '').should('have.focus');
+    input.value.should('equal', '');
   });
 
   it.skip('screenshots', () => {
