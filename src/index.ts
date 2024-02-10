@@ -1,3 +1,7 @@
+import './assets/theme.scss';
+
+export * from './gleam.plugin';
+
 export { default as GlmAmount } from './components/glm-amount/glm-amount.vue';
 export * from './components/glm-amount/glm-amount.utils';
 
